@@ -1,0 +1,13 @@
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = ["//internal/language/test_filegroup:all_files"],
+    visibility = ["//visibility:public"],
+)
+
+tconf_binary(
+    name = "tconf_bin_internal/language",
+    srcs = ["//internal/language/test_filegroup:all_files"],
+    custom_xiang = 2324,
+    visibility = ["//visibility:public"],
+)
