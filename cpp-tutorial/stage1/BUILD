@@ -10,6 +10,8 @@ gazelle_binary(
     name = "gazelle_local",
     languages = [
         "//internal/language/test_filegroup",
+        "@bazel_gazelle//language/go",  # Built-in rule from gazelle for Golang, 最好带上，否则一些 gazelle directive 无法使用。
+        "@bazel_gazelle//language/proto",  # Built-in rule from gazelle for Protos.
     ],
 )
 
@@ -29,24 +31,5 @@ filegroup(
         "//main:all_files",
         "//xiang_test:all_files",
     ],
-    visibility = ["//visibility:public"],
-)
-
-tconf_binary(
-    name = "tconf_bin_",
-    srcs = [
-        ".bazelrc",
-        "BUILD",
-        "README.md",
-        "WORKSPACE",
-        "bazel-bin",
-        "bazel-out",
-        "bazel-stage1",
-        "bazel-testlogs",
-        "//internal:all_files",
-        "//main:all_files",
-        "//xiang_test:all_files",
-    ],
-    custom_xiang = 2324,
     visibility = ["//visibility:public"],
 )

@@ -2,18 +2,9 @@ filegroup(
     name = "all_files",
     testonly = True,
     srcs = [
+        "BUILD.bazel",
         "sfwef.yaml",
         "test.txt",
     ],
-    visibility = ["//visibility:public"],
-)
-
-tconf_binary(
-    name = "tconf_bin_xiang_test",
-    srcs = [
-        "sfwef.yaml",
-        "test.txt",
-    ],
-    custom_xiang = 2324,
     visibility = ["//visibility:public"],
 )

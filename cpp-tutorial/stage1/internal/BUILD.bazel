@@ -7,13 +7,3 @@ filegroup(
     ],
     visibility = ["//visibility:public"],
 )
-
-tconf_binary(
-    name = "tconf_bin_internal",
-    srcs = [
-        "BUILD.bazel",
-        "//internal/language:all_files",
-    ],
-    custom_xiang = 2324,
-    visibility = ["//visibility:public"],
-)

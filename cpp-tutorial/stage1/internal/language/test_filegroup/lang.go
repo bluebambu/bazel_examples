@@ -1,7 +1,7 @@
 package test_filegroup
 
 import (
-	// "fmt"
+	"fmt"
 	// "encoding/json"
 	"path"
 
@@ -27,7 +27,13 @@ func NewLanguage() language.Language {
 
 func (*testFilegroupLang) Name() string { return testFilegroupName }
 
+func (*testFilegroupLang) Loads() []rule.LoadInfo { 
+	fmt.Println("++++++++++++++  Loads")
+	return nil 
+}
+
 func (*testFilegroupLang) Kinds() map[string]rule.KindInfo {
+	fmt.Println("++++++++++++++  kinds")
 	return kinds
 }
 
@@ -43,7 +49,7 @@ var kinds = map[string]rule.KindInfo{
 }
 
 func (l *testFilegroupLang) GenerateRules(args language.GenerateArgs) language.GenerateResult {
-	// fmt.Println("++++++++++++++")
+	fmt.Println("++++++++++++++  GenerateRules: " + args.Rel)
 	// j,_ := json.MarshalIndent(args, "", "  ")
 	// fmt.Printf("%s", string(j))
 	// fmt.Println("++++++++++++++")
@@ -80,16 +86,19 @@ func (l *testFilegroupLang) GenerateRules(args language.GenerateArgs) language.G
 	}
 
 	return language.GenerateResult{
-		Gen:     []*rule.Rule{r, t},
-		Imports: []interface{}{nil, nil},
+		Gen:     []*rule.Rule{r},
+		Imports: []interface{}{nil},
 	}
 }
 
 func (l *testFilegroupLang) DoneGeneratingRules() {
+	fmt.Println("++++++++++++++  DoneGeneratingRules")
 	l.sawDone = true
 }
 
 func (l *testFilegroupLang) Resolve(c *config.Config, ix *resolve.RuleIndex, rc *repo.RemoteCache, r *rule.Rule, imports interface{}, from label.Label) {
+	// j, _ := json.MarshalIndent(c, "", " ")
+	fmt.Println("++++++++++++++  Resolve") 
 	if !l.sawDone {
 		panic("Expected a call to DoneGeneratingRules before Resolve")
 	}
